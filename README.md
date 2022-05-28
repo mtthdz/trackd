@@ -13,5 +13,11 @@
 
 ```
 
-Trackd
-version 0.0.1
+Trackd <br />
+version 0.0.1 <br />
+
+```
+// starts nodemon on port 8000
+// requires connection to MongoDB
+$ npm start
+```
