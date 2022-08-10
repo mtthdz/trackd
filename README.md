@@ -43,11 +43,7 @@ Frontend
 - [ ]  State management
 - [ ]  Routing
 - [ ]  component & styling architecture
-- [ ]  User authentication
-  - [ ]  Create account
-  - [ ]  Delete account
-  - [ ]  Edit account
-  - [ ]  Login/out flow
+- [ ]  User authentication (Auth0)
 - [ ]  Recipe form
 - [ ]  Track form
 - [ ]  Tracking log
