@@ -25,8 +25,11 @@ Trackd is a nutrition tracking app built with React, Express, NodeJS and MongoDB
 install dependencies
 $ npm install
 
+starts react server 3000
+$ cd client && npm start
+
 starts nodemon on port 8000 (requires connection to MongoDB)
-$ npm start
+$ cd server && npm start
 ```
 
 ### To Do ###
