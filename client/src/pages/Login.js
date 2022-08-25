@@ -1,9 +1,11 @@
 import React from "react";
+import TestForm from "../components/TestForm";
 
 const Login = () => {
   return(
     <section>
-      <h2>Login Page</h2>
+      <p>Login Page</p>
+      <TestForm />
     </section>
   );
 }
