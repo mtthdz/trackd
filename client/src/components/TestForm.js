@@ -4,8 +4,8 @@ import React from "react";
 const TestForm = () => {
   // variables to work with
   let formData = {
-    userName: '',
-    userEmail: '',
+    recipeName: '',
+    recipeDescription: '',
   }
 
 
@@ -14,16 +14,16 @@ const TestForm = () => {
     event.preventDefault();
 
     // TODO change target[] names for syntax purposes
-    formData.userName = event.target[0].value;
-    formData.userEmail = event.target[1].value;
+    formData.recipeName = event.target[0].value;
+    formData.recipeDescription = event.target[1].value;
 
     // api call
-    fetch('http://localhost:8000/users/add', {
+    fetch('http://localhost:8000/recipes/add', {
       method: 'post',
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify({
-        name: formData.userName,
-        email: formData.userEmail,
+        name: formData.recipeName,
+        description: formData.recipeDescription,
       }),
     }).then(res => {
       console.log(res);

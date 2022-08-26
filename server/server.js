@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/users');
+const recipeRoutes = require('./routes/recipes');
 
 require('dotenv').config();
 const app = express();
@@ -21,3 +22,4 @@ app.listen(port, () => {
 
 
 app.use('/', userRoutes);
+app.use('/recipes/', recipeRoutes);
