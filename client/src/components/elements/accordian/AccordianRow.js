@@ -61,22 +61,20 @@ const RowStyles = styled.div`
   &:focus ${HiddenRow} {
     display: flex;
   }
-
 `;
 
 
 const AccordianRow = (props) => {
-  const [name, updateName] = useState('-');
-  const [macros, updateMacros] = useState('0 / 0 / 0');
-  const [kcal, updateKcal] = useState(0);
-
-  console.log(props);
-
   /**
    * we need a way to making passing props optional from the parent to this
    * row component, without getting errors. We'll utilize state with an
    * initial state value to do this.
    */
+  const [name, updateName] = useState('-');
+  const [macros, updateMacros] = useState('0 / 0 / 0');
+  const [kcal, updateKcal] = useState(0);
+
+
   useEffect(() => {
     for (const key in props) {
       switch(key) {
@@ -102,7 +100,7 @@ const AccordianRow = (props) => {
           return;
       }
     }
-  }, []);
+  }, [props]);
 
 
   return(

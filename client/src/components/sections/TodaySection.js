@@ -1,6 +1,7 @@
 import React from "react";
-import AccordianHead from "../components/elements/accordian/AccordianHead";
-import AccordianRow from "../components/elements/accordian/AccordianRow";
+import AccordianHead from "../elements/accordian/AccordianHead";
+import AccordianRow from "../elements/accordian/AccordianRow";
+import fetchToday from "../../utils/Date";
 
 // sample data
 const recipeData = [
@@ -8,24 +9,22 @@ const recipeData = [
   {name: 'burger & fries', macros: ' 40 / 80 / 45', kcal: 1200},
   {name: 'yoghurt', macros: '5 / 10 / 15', kcal: 250},
 ]
+const goalKcal = 3200;
 
 
-const Recipes = () => {
-  // totals kcal from dataset
-  let goalKcal = 3200;
+const TodaySection = () => {
   let totalKcal = 0;
-
 
   recipeData.forEach((value) => {
     totalKcal = totalKcal + value.kcal;
   });
 
-
   return(
     <section>
       <AccordianHead
-        title={"recipe"}
+        title={`today ${fetchToday()}`}
         macros={true}
+        kcal={`${totalKcal} / ${goalKcal} kcal`}
       />
 
       {recipeData.length === 0 || recipeData.length === undefined
@@ -38,4 +37,4 @@ const Recipes = () => {
   );
 }
 
-export default Recipes;
+export default TodaySection;

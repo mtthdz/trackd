@@ -1,10 +1,11 @@
 import React from "react";
+import TodaySection from "../components/sections/TodaySection";
 
-
+// sample data
 const Journal = () => {
   return(
     <>
-      <p>hello</p>
+      <TodaySection />
     </>
   );
 }

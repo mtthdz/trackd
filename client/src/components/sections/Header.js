@@ -1,5 +1,5 @@
 import React from "react";
-import Nav from './Nav';
+import Nav from '../elements/Nav';
 import styled from "styled-components";
 
 const HeaderStyles = styled.div`

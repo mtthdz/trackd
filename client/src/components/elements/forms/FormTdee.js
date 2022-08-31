@@ -1,7 +1,7 @@
 import React from "react";
 
 
-const TdeeForm = () => {
+const FormTdee = () => {
   const userFormSubmit = (e) => {
     e.preventDefault();
     console.log(e);
@@ -23,4 +23,4 @@ const TdeeForm = () => {
   );
 }
 
-export default TdeeForm;
+export default FormTdee;
