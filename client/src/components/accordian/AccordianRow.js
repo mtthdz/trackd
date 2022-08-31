@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 
+/**
+ * for hover states to work on child (styled) elements, the children
+ * must be defined prior to parent, hence the weird styling order.
+ */
 const VisibleRow = styled.div`
   display: grid;
   grid-template-columns: 2fr 8fr 2fr;
@@ -25,7 +29,7 @@ const HiddenRow = styled.div`
 
   button:hover,
   button:focus {
-    color: red;
+    color: #5d5fef;
   }
 `;
 
@@ -62,12 +66,51 @@ const RowStyles = styled.div`
 
 
 const AccordianRow = (props) => {
+  const [name, updateName] = useState('-');
+  const [macros, updateMacros] = useState('0 / 0 / 0');
+  const [kcal, updateKcal] = useState(0);
+
+  console.log(props);
+
+  /**
+   * we need a way to making passing props optional from the parent to this
+   * row component, without getting errors. We'll utilize state with an
+   * initial state value to do this.
+   */
+  useEffect(() => {
+    for (const key in props) {
+      switch(key) {
+        case 'name':
+          if(props[key] !== undefined) {
+            updateName(props[key]);
+          };
+          break;
+
+        case 'macros':
+          if(props[key] !== undefined) {
+            updateMacros(props[key]);
+          };
+          break;
+
+        case 'kcal':
+          if(props[key] !== undefined) {
+            updateKcal(props[key]);
+          };
+          break;
+
+        default:
+          return;
+      }
+    }
+  }, []);
+
+
   return(
     <RowStyles>
       <VisibleRow>
-        <p>{props.name}</p>
-        <p>{props.macros}</p>
-        <p>{props.kcal} kcal</p>
+        <p>{name}</p>
+        <p>{macros}</p>
+        <p>{kcal} kcal</p>
       </VisibleRow>
 
       <HiddenRow>
