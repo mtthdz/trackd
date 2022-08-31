@@ -7,7 +7,7 @@ import Journal from './pages/Journal';
 import Login from './pages/Login';
 import Recipes from './pages/Recipes';
 import Profile from './pages/Profile';
-import Header from './components/Header';
+import Header from './components/sections/Header';
 
 
 const WrapperStyles = styled.div`

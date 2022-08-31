@@ -1,5 +1,5 @@
 import React from "react";
-import TdeeForm from "../components/TdeeForm";
+import TdeeForm from "../components/elements/forms/FormTdee";
 
 const Profile = () => {
   return(
