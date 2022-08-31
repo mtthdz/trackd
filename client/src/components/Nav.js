@@ -43,7 +43,7 @@ const Nav = () => {
           <ul>
             <li><StyledLink to="/">journal</StyledLink></li>
             <li><StyledLink to="/recipes">recipes</StyledLink></li>
-            <li><StyledLink to="/tdee">profile</StyledLink></li>
+            <li><StyledLink to="/profile">profile</StyledLink></li>
           </ul>
         </nav>
     </StyledNav>

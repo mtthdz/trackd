@@ -6,7 +6,7 @@ import GlobalStyles from './styles/GlobalStyles';
 import Journal from './pages/Journal';
 import Login from './pages/Login';
 import Recipes from './pages/Recipes';
-import TDEE from './pages/TDEE';
+import Profile from './pages/Profile';
 import Header from './components/Header';
 
 
@@ -32,13 +32,14 @@ const App = () => {
   
     <div className="App">
       <Header />
+
       <WrapperStyles>
         <Routes>
           <Route path="/Login" element={ <Login /> } />
 
           <Route path="/" element={ <Journal /> } />
           <Route path="/recipes" element={ <Recipes /> } />
-          <Route path="/tdee" element={ <TDEE /> } />
+          <Route path="/profile" element={ <Profile /> } />
         </Routes>
       </WrapperStyles>
     </div>
