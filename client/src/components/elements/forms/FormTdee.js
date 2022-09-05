@@ -10,6 +10,8 @@ const FormStyles = styled.form`
   input,
   select {
     width: 100%;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
     font-size: 1.6rem;
     background: none;
     border: none;
@@ -54,19 +56,19 @@ const FormTdee = () => {
   return(
     <FormContainer>
       <FormStyles id="testForm" onSubmit={userFormSubmit}>
-        <input type="text" id='formTdee-name' name='name' placeholder='name'></input>
+        <input type="text" id='formTdee-name' name='name' placeholder='name' required></input>
 
-        <select id='formTdee-gender' name='gender'>
+        <select id='formTdee-gender' name='gender' required>
           <option value="" disabled selected>gender</option>
           <option value="male">male</option>
           <option value="female">female</option>
         </select>
 
-        <input type="number" id='formTdee-age' name='age' placeholder='age'></input>
-        <input type="number" id='formTdee-height' name='height' placeholder='height (cm)'></input>
-        <input type="number" id='formTdee-weight' name='weight' placeholder='weight (kg)'></input>
+        <input type="number" id='formTdee-age' name='age' placeholder='age' required></input>
+        <input type="number" id='formTdee-height' name='{height}' placeholder='height (cm)' required></input>
+        <input type="number" id='formTdee-weight' name='weight' placeholder='weight (kg)' required></input>
 
-        <select id='formTdee-activity' name='activity-level'>
+        <select id='formTdee-activity' name='activity-level' required>
           <option value="" disabled selected>activity level</option>
           <option value="al1">little to none</option>
           <option value="al2">light exercise (1 - 3 times per week)</option>
@@ -74,7 +76,7 @@ const FormTdee = () => {
           <option value="al4">heavy physical exercise (5 - 6 times per week)</option>
         </select>
 
-        <select id='formTdee-nutrition' name='nutrition-target'>
+        <select id='formTdee-nutrition' name='nutrition-target' required>
           <option value="" disabled selected>nutrition target</option>
           <option value="m">maintenance</option>
           <option value="b1">bulk (0.5lb per week)</option>

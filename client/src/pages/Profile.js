@@ -1,10 +1,12 @@
 import React from "react";
-import TdeeForm from "../components/elements/forms/FormTdee";
+import FormTdee from "../components/elements/forms/FormTdee";
+import FormRecipe from "../components/elements/forms/FormRecipe";
 
 const Profile = () => {
   return(
     <section>
-      <TdeeForm />
+      {/* <FormTdee /> */}
+      <FormRecipe />
     </section>
   );
 }
