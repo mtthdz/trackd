@@ -22,7 +22,7 @@ const GlobalStyles = createGlobalStyle`
 
   a {
     text-decoration: none;
-    color: $blackShade;
+    color: #404040;
   }
 
   * {

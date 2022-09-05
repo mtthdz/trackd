@@ -23,7 +23,6 @@ const WrapperStyles = styled.div`
   }
 `;
 
-
 const App = () => {
 
   return (
@@ -35,11 +34,11 @@ const App = () => {
 
       <WrapperStyles>
         <Routes>
-          <Route path="/Login" element={ <Login /> } />
+          <Route path="Login" element={ <Login /> } />
 
           <Route path="/" element={ <Journal /> } />
           <Route path="/recipes" element={ <Recipes /> } />
-          <Route path="/profile" element={ <Profile /> } />
+          <Route path="/tdee" element={ <TDEE /> } />
         </Routes>
       </WrapperStyles>
     </div>
