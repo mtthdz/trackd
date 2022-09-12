@@ -1,6 +1,10 @@
 import React from "react";
+import styled from "styled-components";
+
+import Header from "../components/sections/Header";
 import AccordianHead from "../components/elements/accordian/AccordianHead";
 import AccordianRow from "../components/elements/accordian/AccordianRow";
+
 
 // sample data
 const recipeData = [
@@ -9,6 +13,12 @@ const recipeData = [
   {name: 'yoghurt', macros: '5 / 10 / 15', kcal: 250},
 ]
 
+const WrapperStyles = styled.div`
+  max-width: 1200px;
+  width: 90%;
+  margin: 0 auto;
+  height: 2000px;
+`;
 
 const Recipes = () => {
   // totals kcal from dataset
@@ -22,19 +32,23 @@ const Recipes = () => {
 
 
   return(
-    <section>
-      <AccordianHead
-        title={"recipe"}
-        macros={true}
-      />
+    <>
+      <Header />
 
-      {recipeData.length === 0 || recipeData.length === undefined
-        ? <p>Nothing here yet!</p>
-        : recipeData.map((value, index) => {
-          return <AccordianRow key={index}  name={value.name} macros={value.macros} kcal={value.kcal} />
-        })
-      }
-    </section>
+      <WrapperStyles>
+        <AccordianHead
+          title={"recipe"}
+          macros={true}
+        />
+
+        {recipeData.length === 0 || recipeData.length === undefined
+          ? <p>Nothing here yet!</p>
+          : recipeData.map((value, index) => {
+            return <AccordianRow key={index}  name={value.name} macros={value.macros} kcal={value.kcal} />
+          })
+        }
+      </WrapperStyles>
+    </>
   );
 }
 
