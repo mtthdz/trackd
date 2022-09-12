@@ -1,12 +1,12 @@
 import React from "react";
-import { signInWithGoogle } from "../utils/Firebase";
+import { signInWithGoogle, signOutWithGoogle } from "../utils/Firebase";
 
-// sample data
 const Journal = () => {
 
   return(
     <>
-      <button onClick={signInWithGoogle}>Sign in with Google</button>
+      <button onClick={signInWithGoogle}>Log in with Google</button>
+      <button onClick={signOutWithGoogle}>Logout</button>
     </>
   );
 }
