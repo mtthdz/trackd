@@ -1,10 +1,9 @@
 import React from "react";
 
-
 const Login = () => {
   return(
     <section>
-      <p>Login Page</p>
+      <p>hello there</p>
     </section>
   );
 }
