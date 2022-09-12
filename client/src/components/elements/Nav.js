@@ -41,7 +41,7 @@ const Nav = () => {
 
         <nav>
           <ul>
-            <li><StyledLink to="/">journal</StyledLink></li>
+            <li><StyledLink to="/journal">journal</StyledLink></li>
             <li><StyledLink to="/recipes">recipes</StyledLink></li>
             <li><StyledLink to="/profile">profile</StyledLink></li>
           </ul>

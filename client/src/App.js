@@ -1,58 +1,67 @@
 import React, {useState, useEffect} from 'react';
 import { Routes, Route } from 'react-router-dom';
-import styled from 'styled-components';
 
 import GlobalStyles from './styles/GlobalStyles';
 import Journal from './pages/Journal';
 import Login from './pages/Login';
 import Recipes from './pages/Recipes';
 import Profile from './pages/Profile';
-import Header from './components/sections/Header';
 import { auth } from './utils/Firebase';
-import { AuthProvider } from './utils/authContext';
-import { onAuthStateChanged } from 'firebase/auth'
+import { onAuthStateChanged } from 'firebase/auth';
+import PrivateRoute from './pages/PrivateRoute';
 
-const WrapperStyles = styled.div`
-  max-width: 1200px;
-  width: 90%;
-  margin: 0 auto;
 
-  button {
-    background: none;
-    border: none;
-    outline: none;
-    font-size: 1.6rem;
-  }
-`;
+export const UserContext = React.createContext(null);
 
 const App = () => {
-  const [currentUser, setCurrentUser] = useState(null);
+  const [user, setUser] = useState(null);
 
+  /**
+   * changes global state of signed in user
+   * attached to Firebase auth, so no need for
+   * updating state value in child components
+   */
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user)
+      setUser(user);
     })
-  }, [])
+  }, [user]);
 
   return (
     <>
-    <GlobalStyles />
-  
-    <div className="App">
-      <Header />
+      <UserContext.Provider value={{user, setUser}}>
+        <GlobalStyles />
+          <div className="App">
+              <Routes>
+                <Route path="/" element={ <Login /> } />
 
-      <WrapperStyles>
-        <AuthProvider value={{currentUser}}>
-          <Routes>
-              <Route path="Login" element={ <Login /> } />
-
-              <Route path="/" element={ <Journal /> } />
-              <Route path="/recipes" element={ <Recipes /> } />
-              <Route path="/profile" element={ <Profile /> } />
-          </Routes>
-        </AuthProvider>
-      </WrapperStyles>
-    </div>
+                <Route
+                  path="/journal"
+                  element={
+                    <PrivateRoute>
+                      <Journal />
+                    </PrivateRoute>
+                  } 
+                />
+                <Route
+                  path="/recipes"
+                  element={
+                    <PrivateRoute>
+                      <Recipes />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path="/profile"
+                  element={
+                    <PrivateRoute>
+                      <Profile />
+                    </PrivateRoute>
+                  }
+                />
+              </Routes>
+          </div>
+      </UserContext.Provider>
     </>
   );
 }
