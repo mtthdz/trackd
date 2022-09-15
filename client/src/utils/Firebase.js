@@ -1,12 +1,10 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
 import {getAuth, signInWithPopup, GoogleAuthProvider, signOut} from 'firebase/auth';
+import { findUser } from '../api/AuthEndpoint';
 
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
+// Firebase configuration
 const firebaseConfig = {
   apiKey: 'AIzaSyCt1vi-gIQj10cTTrmvLpsqUl-huXygOqg',
   authDomain: 'trackd-180d9.firebaseapp.com',
@@ -25,20 +23,15 @@ export {auth};
 
 export const SignInWithGoogle = () => {
   signInWithPopup(auth, provider)
-  .then((result) => {
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    const token = credential.accessToken;
-    const user = result.user;
-  
-  }).catch((error) => {
-    // Handle Errors here.
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // The email of the user's account used.
-    const email = error.customData.email;
-    // The AuthCredential type that was used.
-    const credential = GoogleAuthProvider.credentialFromError(error);
-    // ...
+  .then((res) => {
+    const uid = res.user.uid;
+    const name = res.user.displayName;
+    const email = res.user.email;
+
+    findUser(uid, name, email);
+
+  }).catch((err) => {
+    return err;
   });
 }
 
@@ -46,7 +39,7 @@ export const SignOutWithGoogle = () => {
   signOut(auth).then(() => {
     console.log('signed out');
     return 'signed out';
-  }).catch((error) => {
-    return error;
+  }).catch((err) => {
+    return err;
   })
 }
