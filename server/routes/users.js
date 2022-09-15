@@ -3,7 +3,7 @@ const User = require("../models/user.model");
 
 const userRoutes = express.Router();
 
-// read
+// find all users
 userRoutes.route('/').get(function(req, res) {
   User.find({}, function(err, users) {
     if(err) {
@@ -14,7 +14,25 @@ userRoutes.route('/').get(function(req, res) {
   })
 });
 
-// create
+
+// find user by firebase uid
+userRoutes.route('/:uid').get(function(req, res) {
+  let uid = req.params.uid;
+
+  User.findOne({uid: uid}, function(error, user) {
+    if(error) {
+      res.status(400).send('adding new user failed');
+
+    } else if(user) {
+      res.status(200).json('user exists');
+    } else {
+      res.status(202).json('user does not exist');
+    }
+  });
+})
+
+
+// create user
 userRoutes.route('/add').post(function(req, res) {
   let newUser = new User(req.body);
 

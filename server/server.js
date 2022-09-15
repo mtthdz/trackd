@@ -20,4 +20,4 @@ app.listen(port, () => {
 });
 
 
-app.use('/', userRoutes);
+app.use('/users', userRoutes);

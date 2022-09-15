@@ -34,12 +34,12 @@ const registerUser = (uid, name, email) => {
 export const findUser = (uid, name, email) => {
   fetch(`http://localhost:8000/users/${uid}`, {
       method: 'get',
-    }).then(response => {
-      if (response.ok) {
-        return response.json();
+    }).then(res => {
+      if (res.ok) {
+        return res.json();
 
       } else {
-        return (response.json()).then(data => {
+        return (res.json()).then(data => {
           throw new Error(data.message);
         });
       };
