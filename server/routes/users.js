@@ -4,7 +4,7 @@ const User = require("../models/user.model");
 const userRoutes = express.Router();
 
 // find all users
-userRoutes.route('/').get(function(req, res) {
+userRoutes.route('/').get((req, res) => {
   User.find({}, function(err, users) {
     if(err) {
       console.log(err);
@@ -12,37 +12,28 @@ userRoutes.route('/').get(function(req, res) {
       res.json(users);
     }
   })
-});
-
-
-// find user by firebase uid
-userRoutes.route('/:uid').get(function(req, res) {
-  let uid = req.params.uid;
-
-  User.findOne({uid: uid}, function(error, user) {
-    if(error) {
-      res.status(400).send('adding new user failed');
-
-    } else if(user) {
-      res.status(200).json('user exists');
-    } else {
-      res.status(202).json('user does not exist');
-    }
-  });
 })
 
+// find user via firebase uid
+// if user does not exist, create new user
+// regardless, return user body
+userRoutes.route('/find').post(async (req, res) => {
+  let uid = req.body.uid;
+  let user = await User.findOne({uid: uid});
 
-// create user
-userRoutes.route('/add').post(function(req, res) {
-  let newUser = new User(req.body);
+  if(user) {
+    res.json(user);
+  } else {
+    let newUser = new User(req.body);
 
-  newUser.save()
+    newUser.save()
     .then(newUser => {
-      res.status(200).json({'newUser': 'new user has been saved.'});
+      res.status(200).json(newUser);
     })
     .catch(err => {
       res.status(400).send('adding new user failed');
     });
-});
+  }
+})
 
 module.exports = userRoutes;
