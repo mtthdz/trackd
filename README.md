@@ -32,23 +32,16 @@ starts nodemon on port 8000 (requires connection to MongoDB)
 $ cd server && npm start
 ```
 
-### To Do ###
-Backend
-- [x]  Dependencies and boilerplate setup
-- [x]  Server & database connection
-- [ ]  Logging middleware
-- [ ]  User Schema & endpoints
-- [ ]  Recipe Schema & endpoints
-- [ ]  Track Schema & endpoints
-- [ ]  Endpoint authorization 
 
-Frontend
-- [ ]  State management
-- [ ]  Routing
-- [ ]  component & styling architecture
-- [ ]  User authentication (Auth0)
-- [ ]  Recipe form
-- [ ]  Track form
-- [ ]  Tracking log
-- [ ]  Recipe list
-- [ ]  Daily track reset & archive 
+### Progress Log ###
+- initial project directory structure
+- (back end) MongoDB server setup
+- (back end) user schema, routes & controller*
+- (back end) authorization process via Firebase Admin
+- (front end) routing & page components
+- (front end) accordian header & row components
+- (front end) TDEE form
+- (front end) recipe form
+- (front end) authentication process via Firebase Auth (Google only)*
+
+* in progress
