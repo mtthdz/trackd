@@ -36,7 +36,7 @@ export const SignInWithGoogle = () => {
   signInWithPopup(auth, provider)
   .then((res) => {
     const idToken = res._tokenResponse.idToken;
-    
+
     return getUser(idToken);
   })
   .catch((error) => {
