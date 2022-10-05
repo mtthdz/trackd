@@ -17,6 +17,7 @@
 version 0.0.1 <br />
 
 Trackd is a nutrition tracking app built with React, Express, NodeJS and MongoDB. <br />
+Prototype can be found on <a href="https://www.figma.com/file/GHpjvTa8jIGI1iLor4JICX/Prototype?node-id=0%3A1" target="_blank">here on Figma</a>.<br />
 
 
 ### Getting Started ###
