@@ -15,3 +15,5 @@ yarn-error.log*
 .env.development.local
 .env.test.local
 .env.production.local
+
+trackd-180d9-firebase-adminsdk-fikoi-d82e7c8cf3.json
