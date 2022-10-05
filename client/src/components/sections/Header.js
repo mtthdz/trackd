@@ -2,8 +2,7 @@ import React, { useContext, useEffect } from "react";
 import Nav from '../elements/Nav';
 import styled from "styled-components";
 import { SignOutWithGoogle } from "../../utils/Firebase";
-import { useNavigate } from "react-router-dom";
-import { UserContext } from "../../App";
+
 
 const HeaderStyles = styled.div`
   box-shadow: 0px 8px 40px 0px #e2e2e2;
@@ -30,15 +29,6 @@ const WrapperStyles = styled.div`
 `;
 
 const Header = () => {
-  const currentUser = useContext(UserContext);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if(!currentUser.user) {
-      navigate('/');
-    }
-  }, [currentUser])
-
   return(
     <HeaderStyles>
       <WrapperStyles>

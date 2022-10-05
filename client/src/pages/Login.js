@@ -1,8 +1,9 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../App";
 import { SignInWithGoogle } from "../utils/Firebase";
 import styled from 'styled-components';
+
 
 const WrapperStyles = styled.div`
   max-width: 1200px;
@@ -29,31 +30,18 @@ const WrapperStyles = styled.div`
   button:hover,
   button:focus {
     color: #40404070;
+    cursor: pointer;
   }
 `;
 
 
 const Login = () => {
-  const user = useContext(UserContext);
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    if(user.user) {
-      navigate('/recipes');
-    };
-  }, [user]);
-
-
-  const login = () => {
-    SignInWithGoogle();
-    // authorize to backend
-    // redirect to main pages
-  };
 
   return(
     <WrapperStyles>
       <h1>trackd is a macronutrient tracking app.</h1>
-      <button onClick={login}>login with Google</button>
+      <button onClick={SignInWithGoogle}>login with Google</button>
     </WrapperStyles>
   );
 }
