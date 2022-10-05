@@ -9,10 +9,10 @@
  * TODO: implement authorization via JWT
  */
 export const getUser = (idToken) => {
-  fetch(`http://localhost:8000/users/find`, {
+  fetch(`http://localhost:8000/users/auth`, {
     method: 'post',
     headers: {'Content-Type':'application/json'},
-    body: JSON.stringify({ idToken }),
+    body: JSON.stringify({ token: idToken }),
   }).then(res => {
     if (res.ok) {
       return res.json();
@@ -24,9 +24,11 @@ export const getUser = (idToken) => {
     };
   })
   .then(data => {
+    console.log(data);
     return data;
   })
   .catch((error) => {
+    console.log(error);
     return error;
   })
 }
