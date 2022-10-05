@@ -6,7 +6,9 @@ const GlobalStyles = createGlobalStyle`
   }
 
   body {
+    font-family: 'Roboto', sans-serif;
     font-size: 1.6rem;
+    font-weight: 300;
     background-color: #eee;
     color: #404040;
   }
@@ -16,13 +18,27 @@ const GlobalStyles = createGlobalStyle`
     height: auto;
   }
 
+  button {
+    outline: none;
+    border: none;
+    background: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.6rem;
+    color: #404040;
+  }
+
+  button:hover,
+  button:focus {
+    cursor: pointer;
+  }
+
   ul {
     list-style: none;
   }
 
   a {
     text-decoration: none;
-    color: $blackShade;
+    color: #404040;
   }
 
   * {

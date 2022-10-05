@@ -20,4 +20,7 @@ app.listen(port, () => {
 });
 
 
-app.use('/', userRoutes);
+app.get("/", (req, res) => {
+  res.json({ message: "hello there" });
+});
+app.use('/users', userRoutes);
