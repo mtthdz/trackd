@@ -1,59 +1,32 @@
 /**
  * 
- * @param {*} uid firebase auth object
- * @param {*} name firebase auth object
- * @param {*} email firebase auth object
+ * @param {*} token firebase auth value
  * 
- * post method to create a new user. Nested inside findUser()
+ * nested function within ../utils/Firebase > SignInWithGoogle
+ * this function completes the following task within SignInWithGoogle: 
+ * "2. grab user's idToken, pass to back end server"
+ * 
+ * TODO: implement authorization via JWT
  */
-const registerUser = (uid, name, email) => {
-  fetch(`http://localhost:8000/users/add`, {
+export const getUser = (idToken) => {
+  fetch(`http://localhost:8000/users/find`, {
     method: 'post',
     headers: {'Content-Type':'application/json'},
-    body: JSON.stringify({
-      uid,
-      name,
-      email,
-    }),
+    body: JSON.stringify({ idToken }),
   }).then(res => {
-    return res;
+    if (res.ok) {
+      return res.json();
+
+    } else {
+      return (res.json()).then(data => {
+        throw new Error(data.message);
+      });
+    };
   })
-}
-
-/**
- * 
- * @param {*} uid firebase auth object
- * @param {*} name firebase auth object
- * @param {*} email firebase auth object
- * 
- * function will look for user via uid query argument;
- *  if user with the uid is found, it'll fetch user data
- *  else user will be created by running registerUser()
- * TODO: write function to fetch user data
- */
-export const findUser = (uid, name, email) => {
-  fetch(`http://localhost:8000/users/${uid}`, {
-      method: 'get',
-    }).then(res => {
-      if (res.ok) {
-        return res.json();
-
-      } else {
-        return (res.json()).then(data => {
-          throw new Error(data.message);
-        });
-      };
-    })
-    .then(data => {
-      if(data === 'user does not exist') {
-        registerUser(uid, name, email);
-
-      } else {
-        // get function here
-        console.log(data);
-      }   
-    })
-    .catch((error) => {
-      return error;
-    })
+  .then(data => {
+    return data;
+  })
+  .catch((error) => {
+    return error;
+  })
 }

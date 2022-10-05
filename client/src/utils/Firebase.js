@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
 import {getAuth, signInWithPopup, GoogleAuthProvider, signOut} from 'firebase/auth';
-import { findUser } from '../api/AuthEndpoint';
+import { getUser } from '../api/AuthEndpoint';
 
 
 // Firebase configuration
@@ -21,25 +21,34 @@ const auth = getAuth(app);
 
 export {auth};
 
+
+/**
+ * Auth Process via Firebase Auth & Mongodb
+ * 1. log user in via firebase auth
+ * 2. grab user's idToken, pass to back end server
+ * 3. (back end) verify firebase idToken with Firebase server
+ * 4. (back end) return back uid
+ * 
+ * TODO: return user/crate new user logic; old logic remains within
+ * user/find endpoint
+ */
 export const SignInWithGoogle = () => {
   signInWithPopup(auth, provider)
   .then((res) => {
-    const uid = res.user.uid;
-    const name = res.user.displayName;
-    const email = res.user.email;
-
-    findUser(uid, name, email);
-
-  }).catch((err) => {
-    return err;
+    const idToken = res._tokenResponse.idToken;
+    
+    return getUser(idToken);
+  })
+  .catch((error) => {
+    return error;
   });
 }
 
 export const SignOutWithGoogle = () => {
   signOut(auth).then(() => {
-    console.log('signed out');
     return 'signed out';
-  }).catch((err) => {
+  })
+  .catch((err) => {
     return err;
   })
 }
