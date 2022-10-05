@@ -44,4 +44,4 @@ $ cd server && npm start
 - (front end) recipe form
 - (front end) authentication process via Firebase Auth (Google only)*
 
-* in progress
+(* in progress)
