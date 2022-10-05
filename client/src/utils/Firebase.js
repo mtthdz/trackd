@@ -32,16 +32,16 @@ export {auth};
  * TODO: return user/crate new user logic; old logic remains within
  * user/find endpoint
  */
-export const SignInWithGoogle = () => {
-  signInWithPopup(auth, provider)
-  .then((res) => {
-    const idToken = res._tokenResponse.idToken;
+export const SignInWithGoogle = async () => {
+  
+  try{
+    const firebaseUser = await signInWithPopup(auth, provider);
+    console.log(firebaseUser.user.uid);
+    return firebaseUser;
 
-    return getUser(idToken);
-  })
-  .catch((error) => {
+  } catch(error) {
     return error;
-  });
+  }
 }
 
 export const SignOutWithGoogle = () => {

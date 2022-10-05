@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../App";
 import { SignInWithGoogle } from "../utils/Firebase";
 import styled from 'styled-components';
+import { getUser } from "../api/AuthEndpoint";
 
 
 const WrapperStyles = styled.div`
@@ -37,11 +38,24 @@ const WrapperStyles = styled.div`
 
 const Login = () => {
 
+  const loginTest = async () => {
+    try {
+      let firebaseUser = await SignInWithGoogle();
+      let uid = await getUser(firebaseUser);
+
+      console.log(uid);
+      return uid;
+
+    } catch(err) {
+      console.log(err);
+      return err;
+    }
+  };
 
   return(
     <WrapperStyles>
       <h1>trackd is a macronutrient tracking app.</h1>
-      <button onClick={SignInWithGoogle}>login with Google</button>
+      <button onClick={loginTest}>login with Google</button>
     </WrapperStyles>
   );
 }

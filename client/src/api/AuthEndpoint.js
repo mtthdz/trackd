@@ -8,27 +8,20 @@
  * 
  * TODO: implement authorization via JWT
  */
-export const getUser = (idToken) => {
-  fetch(`http://localhost:8000/users/auth`, {
-    method: 'post',
-    headers: {'Content-Type':'application/json'},
-    body: JSON.stringify({ token: idToken }),
-  }).then(res => {
-    if (res.ok) {
-      return res.json();
+export const getUser = async (firebaseUser) => {
+  let token = firebaseUser._tokenResponse.idToken;
+  
+  try {
+    let res = await fetch(`http://localhost:8000/users/auth`, {
+      method: 'post',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ token: token }),
+    });
 
-    } else {
-      return (res.json()).then(data => {
-        throw new Error(data.message);
-      });
-    };
-  })
-  .then(data => {
-    console.log(data);
+    let data = await res.json();
     return data;
-  })
-  .catch((error) => {
-    console.log(error);
-    return error;
-  })
+
+  } catch(err) {
+    return err;
+  }
 }
