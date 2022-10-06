@@ -38,16 +38,21 @@ const WrapperStyles = styled.div`
 
 const Login = () => {
 
-  const loginTest = async () => {
+  /**
+   * Auth Process via Firebase Auth & Mongodb
+   * 1. log Gmail user in via Firebase auth API
+   * 2. grab user's metadata object, and is passed to MongoDB server
+   * 3. (back end) verify firebase idToken with Firebase server
+   * 4. (back end) return back uid
+   * 5. update global state with user object
+   */
+  const auth = async () => {
     try {
       let firebaseUser = await SignInWithGoogle();
-      let uid = await getUser(firebaseUser);
-
-      console.log(uid);
-      return uid;
+      let authorizedUser = await getUser(firebaseUser);
+      return authorizedUser;
 
     } catch(err) {
-      console.log(err);
       return err;
     }
   };
@@ -55,7 +60,7 @@ const Login = () => {
   return(
     <WrapperStyles>
       <h1>trackd is a macronutrient tracking app.</h1>
-      <button onClick={loginTest}>login with Google</button>
+      <button onClick={auth}>login with Google</button>
     </WrapperStyles>
   );
 }

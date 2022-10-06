@@ -22,18 +22,15 @@ const auth = getAuth(app);
 export {auth};
 
 
-/**
- * Auth Process via Firebase Auth & Mongodb
- * 1. log user in via firebase auth
- * 2. grab user's idToken, pass to back end server
- * 3. (back end) verify firebase idToken with Firebase server
- * 4. (back end) return back uid
- * 
- * TODO: return user/crate new user logic; old logic remains within
- * user/find endpoint
+/** 
+ * @returns fireBaseUser
+ *
+ * - nested function within ../pages/Login > auth
+ * - this function will run the Firebase API to authenticate Gmail users
+ * - once the user has been authenticated, the preceding getUser() will
+ *   send the user's object to the MongoDB server
  */
 export const SignInWithGoogle = async () => {
-  
   try{
     const firebaseUser = await signInWithPopup(auth, provider);
     console.log(firebaseUser.user.uid);

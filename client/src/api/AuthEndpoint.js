@@ -1,12 +1,12 @@
 /**
  * 
- * @param {*} token firebase auth value
- * 
- * nested function within ../utils/Firebase > SignInWithGoogle
- * this function completes the following task within SignInWithGoogle: 
- * "2. grab user's idToken, pass to back end server"
- * 
- * TODO: implement authorization via JWT
+ * @param {*} firebaseUser firebase auth value
+ * @returns authorizedUser
+ *
+ * - nested function within ../pages/Login > auth
+ * - this function will use the firebaseUser object and send to the server
+ * - the server will then complete the authorization process and send back
+ *   the logged in user object.
  */
 export const getUser = async (firebaseUser) => {
   let token = firebaseUser._tokenResponse.idToken;
@@ -18,8 +18,8 @@ export const getUser = async (firebaseUser) => {
       body: JSON.stringify({ token: token }),
     });
 
-    let data = await res.json();
-    return data;
+    let authorizedUser = await res.json();
+    return authorizedUser;
 
   } catch(err) {
     return err;
