@@ -9,6 +9,7 @@ admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
 
+
 const userRoutes = express.Router();
 
 // find all users
@@ -31,42 +32,30 @@ userRoutes.route('/').get((req, res) => {
  *    - at this point, user has been verified
  *    - the reason for this is to have Mongo and Firebase servers talk, keeping
  *      front end completely disengaged (OAuth2.0 protocol)
- * 
- * TODO: merge /find to complete getting userdata to front end
+ * 4. Upon verification, Mongo will look for user with Firebase uid
+ * 5. if user exists, Mongo will send user document (as object) back to client
+ *    else if user does not exist, Mongo will create a new user document and send back to client
  */
-userRoutes.route('/auth').post(async (req, res) => {
+userRoutes.post('/auth', async (req, res) => {
   let token = req.body.token;
 
-  admin.auth()
-  .verifyIdToken(token)
-  .then((decodedToken) => {
-    const uid = decodedToken.uid;
-    res.status(200).json(uid);
-  })
-  .catch((error) => {
-    res.status(400).send(token);
-  });
-})
+  try {
+    let decodedToken = await admin.auth().verifyIdToken(token);
+    let user = await User.findOne({ uid: decodedToken.uid });
 
+    if(user) {
+      res.json(user);
 
-// TODO: merge into /auth endpoint
-userRoutes.route('/find').post(async (req, res) => {
-  let uid = req.body.uid;
-  let user = await User.findOne({uid: uid});
+    } else {
+      let newUser = new User({ name: decodedToken.name, email: decodedToken.email, uid: decodedToken.uid });
+      let user = await newUser.save();
+      res.json(user);
 
-  if(user) {
-    res.json(user);
-  } else {
-    let newUser = new User(req.body);
-
-    newUser.save()
-    .then(newUser => {
-      res.status(200).json(newUser);
-    })
-    .catch(err => {
-      res.status(400).send('adding new user failed');
-    });
+    }
+  } catch(err) {
+    res.status(400).send(err);
   }
-})
+});
+
 
 module.exports = userRoutes;
