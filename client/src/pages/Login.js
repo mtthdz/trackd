@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../App";
 import { SignInWithGoogle } from "../utils/Firebase";
@@ -37,6 +37,8 @@ const WrapperStyles = styled.div`
 
 
 const Login = () => {
+  const {setUser} = useContext(UserContext);
+  const navigate = useNavigate();
 
   /**
    * Auth Process via Firebase Auth & Mongodb
@@ -50,7 +52,8 @@ const Login = () => {
     try {
       let firebaseUser = await SignInWithGoogle();
       let authorizedUser = await getUser(firebaseUser);
-      return authorizedUser;
+      setUser(authorizedUser);
+      navigate('/recipes');
 
     } catch(err) {
       return err;

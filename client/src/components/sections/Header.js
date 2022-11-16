@@ -1,7 +1,8 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import Nav from '../elements/Nav';
 import styled from "styled-components";
 import { SignOutWithGoogle } from "../../utils/Firebase";
+import { UserContext } from "../../App";
 
 
 const HeaderStyles = styled.div`
@@ -29,11 +30,18 @@ const WrapperStyles = styled.div`
 `;
 
 const Header = () => {
+  const {setUser} = useContext(UserContext);
+
+  const unAuth = () => {
+    let loggedOutUser = SignOutWithGoogle();
+    setUser(loggedOutUser);
+  }
+
   return(
     <HeaderStyles>
       <WrapperStyles>
         <Nav />
-        <button onClick={SignOutWithGoogle}>logout</button>
+        <button onClick={unAuth}>logout</button>
       </WrapperStyles>
     </HeaderStyles>
   );
