@@ -33,7 +33,6 @@ export {auth};
 export const SignInWithGoogle = async () => {
   try{
     const firebaseUser = await signInWithPopup(auth, provider);
-    console.log(firebaseUser.user.uid);
     return firebaseUser;
 
   } catch(error) {
@@ -43,7 +42,8 @@ export const SignInWithGoogle = async () => {
 
 export const SignOutWithGoogle = () => {
   signOut(auth).then(() => {
-    return 'signed out';
+    let user = null;
+    return user;
   })
   .catch((err) => {
     return err;
