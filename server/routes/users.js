@@ -2,6 +2,7 @@ const express = require('express');
 const User = require("../models/user.model");
 var admin = require("firebase-admin");
 var serviceAccount = require("../trackd-180d9-firebase-adminsdk-fikoi-d82e7c8cf3.json");
+const { mongo } = require('mongoose');
 
 // Firebase Admin initialize
 // TODO: remove json from project dir
@@ -16,7 +17,7 @@ const userRoutes = express.Router();
 userRoutes.route('/').get((req, res) => {
   User.find({}, function(err, users) {
     if(err) {
-      console.log(err);
+      res.status(400).send(err);
     } else {
       res.json(users);
     }
@@ -47,7 +48,11 @@ userRoutes.post('/auth', async (req, res) => {
       res.json(user);
 
     } else {
-      let newUser = new User({ name: decodedToken.name, email: decodedToken.email, uid: decodedToken.uid });
+      let newUser = new User({
+        name: decodedToken.name,
+        email: decodedToken.email,
+        uid: decodedToken.uid
+      });
       let user = await newUser.save();
       res.json(user);
 
@@ -56,6 +61,5 @@ userRoutes.post('/auth', async (req, res) => {
     res.status(400).send(err);
   }
 });
-
 
 module.exports = userRoutes;
