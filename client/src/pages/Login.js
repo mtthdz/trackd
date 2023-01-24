@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../App";
 import { SignInWithGoogle } from "../utils/Firebase";
 import styled from 'styled-components';
-import { getUser } from "../api/AuthEndpoint";
+import { getUser } from "../api/UserEndpoint";
 
 
 const WrapperStyles = styled.div`
