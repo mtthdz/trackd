@@ -32,7 +32,7 @@ const App = () => {
                       <Journal />
                     </PrivateRoute>
                   } 
-                />
+                  />
                 <Route
                   path="/recipes"
                   element={
