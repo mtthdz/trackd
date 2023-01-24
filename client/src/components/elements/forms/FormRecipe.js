@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from '../../../App';
 import styled from "styled-components";
-
+import { saveRecipe } from "../../../api/RecipeEndpoint";
 
 /**
  * TODO: refactor form styling
@@ -50,10 +51,23 @@ const FormStyles = styled.form`
   }
 `;
 
+
 const FormRecipe = () => {
+  const { user } = useContext(UserContext);
+
   const userFormSubmit = (e) => {
+    let uid = user.uid;
+    let recipe = {
+      name: e.target[0].value,
+      macros: {
+        protein: e.target[1].value,
+        carbohydrates: e.target[2].value,
+        fats: e.target[3].value
+      }
+    }
+
     e.preventDefault();
-    console.log(e);
+    saveRecipe(uid, recipe);
   }
 
   // html to render
@@ -61,14 +75,6 @@ const FormRecipe = () => {
     <FormContainer>
       <FormStyles id="testForm" onSubmit={userFormSubmit}>
         <input type="text" id='formRecipe-name' name='name' placeholder='name' required></input>
-        <input
-          type="text"
-          id='formRecipe-description'
-          name='description'
-          placeholder='short description'
-          required>
-        </input>
-
         <input type="number" id='formTdee-pro' name='pro' placeholder='protein' required></input>
         <input type="number" id='formTdee-car' name='car' placeholder='carbohydrates' required></input>
         <input type="number" id='formTdee-fat' name='fat' placeholder='fat' required></input>
